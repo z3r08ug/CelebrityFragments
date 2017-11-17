@@ -1,7 +1,7 @@
 package dev.uublabs.celebrityfragments;
 
-import android.app.Fragment;
-import android.net.Uri;
+
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,27 +22,11 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnFr
     @Override
     public void onFragmentInteraction(Celebrity c)
     {
-        InfoFragment infoFragment = (InfoFragment) getSupportFragmentManager().findFragmentById(R.id.fragInfo);
-        infoFragment.getTvCelebName().setText(c.getName());
-        switch (c.getName())
-        {
-            case "Tom Brady":
-                infoFragment.getIvCeleb().setImageResource(R.drawable.tombrady);
-                break;
 
-            case "Phil Jackson":
-                infoFragment.getIvCeleb().setImageResource(R.drawable.philjackson);
-                break;
-            case "Dwyane Wade":
-                infoFragment.getIvCeleb().setImageResource(R.drawable.wade);
-                break;
-            case "Bill Belichick":
-                infoFragment.getIvCeleb().setImageResource(R.drawable.billbel);
-                break;
-            case "Kobe Bryant":
-                infoFragment.getIvCeleb().setImageResource(R.drawable.kobe);
-                break;
-        }
-        infoFragment.getTvCelebDesc().setText(c.getDescription());
+        InfoFragment infoFragment = InfoFragment.newInstance(c);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.animator.fragment_slide_left_enter, R.animator.fragment_slide_left_exit);
+        fragmentTransaction.replace(R.id.flInfoFrag, infoFragment, "INFO_FRAG").addToBackStack("INFO_FRAG").commit();
     }
 }

@@ -22,12 +22,19 @@
         android:layout_margin="@dimen/std_dimension"
         android:layout_weight="1" />
 
-    <fragment
-        android:id="@+id/fragInfo"
-        android:name="dev.uublabs.celebrityfragments.Fragments.InfoFragment"
+    <FrameLayout
+        android:id="@+id/flInfoFrag"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/std_dimension"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+    <!--<fragment-->
+        <!--android:id="@+id/fragInfo"-->
+        <!--android:name="dev.uublabs.celebrityfragments.Fragments.InfoFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/std_dimension"-->
+        <!--android:layout_weight="1" />-->
 
 </LinearLayout>

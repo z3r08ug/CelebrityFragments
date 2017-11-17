@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import dev.uublabs.celebrityfragments.Celebrity;
 import dev.uublabs.celebrityfragments.R;
 
 /**
@@ -22,10 +23,10 @@ public class InfoFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static Celebrity celebrity;
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int mParam1;
     private TextView tvCelebName;
     private ImageView ivCeleb;
     private TextView tvCelebDesc;
@@ -39,32 +40,33 @@ public class InfoFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param c Parameter 1.
      * @return A new instance of fragment InfoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static InfoFragment newInstance(String param1, String param2) {
+    public static InfoFragment newInstance(Celebrity c) {
+        celebrity = c;
         InfoFragment fragment = new InfoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_PARAM1, c);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        if (getArguments() != null)
+        {
+            mParam1 = getArguments().getInt(ARG_PARAM1);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_info, container, false);
     }
@@ -76,6 +78,39 @@ public class InfoFragment extends Fragment {
         tvCelebName = view.findViewById(R.id.tvCelebName);
         ivCeleb = view.findViewById(R.id.ivCeleb);
         tvCelebDesc = view.findViewById(R.id.tvCelebDesc);
+
+        tvCelebName.setText(celebrity.getName());
+        selectPic();
+        tvCelebDesc.setText(celebrity.getDescription());
+
+    }
+    public void selectPic()
+    {
+        switch (celebrity.getName())
+        {
+            case "Tom Brady":
+                ivCeleb.setImageResource(R.drawable.tombrady);
+                break;
+
+            case "Phil Jackson":
+                ivCeleb.setImageResource(R.drawable.philjackson);
+                break;
+            case "Dwyane Wade":
+                ivCeleb.setImageResource(R.drawable.wade);
+                break;
+            case "Bill Belichick":
+                ivCeleb.setImageResource(R.drawable.billbel);
+                break;
+            case "Kobe Bryant":
+                ivCeleb.setImageResource(R.drawable.kobe);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
     }
 
     public TextView getTvCelebName() {
